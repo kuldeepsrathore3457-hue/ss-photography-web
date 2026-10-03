@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Download Photos | SS Photography</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            <i class="fa-solid fa-camera"></i>
+            <span>SS</span>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="index.html">HOME</a>
+            </li>
+
+            <li>
+                <a href="book.html">BOOK EVENT</a>
+            </li>
+
+            <li>
+                <a class="active" href="download.html">DOWNLOAD PHOTOS</a>
+            </li>
+
+            <li>
+                <a href="index.html#contact">CONTACT</a>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+
+<!-- ================= DOWNLOAD PAGE ================= -->
+
+<section class="download-page">
+
+    <div class="download-wrapper">
+
+        <div class="download-heading">
+
+            <span>YOUR MEMORIES</span>
+
+            <h1>DOWNLOAD PHOTOS</h1>
+
+            <p>
+                अपनी यादों तक पहुँचने के लिए
+                अपनी booking details दर्ज करें।
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN BOX -->
+
+        <div class="download-card" id="loginCard">
+
+            <form id="downloadForm">
+
+                <!-- BOOKING ID -->
+                <div class="form-group">
+
+                    <label>BOOKING ID</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                        <input
+                            type="text"
+                            id="bookingId"
+                            placeholder="Example: SS123456"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- NAME -->
+                <div class="form-group">
+
+                    <label>FULL NAME</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="downloadName"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOBILE -->
+                <div class="form-group">
+
+                    <label>MOBILE NUMBER</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            id="downloadMobile"
+                            placeholder="Enter mobile number"
+                            maxlength="10"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="booking-submit">
+
+                    <i class="fa-solid fa-images"></i>
+
+                    VIEW MY PHOTOS
+
+                </button>
+
+            </form>
+
+
+            <p class="booking-note">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Your gallery is protected.
+
+            </p>
+
+        </div>
+
+
+        <!-- ================= GALLERY ================= -->
+
+        <div class="client-gallery" id="clientGallery">
+
+            <div class="gallery-header">
+
+                <div>
+                    <span>YOUR GALLERY</span>
+                    <h2>YOUR MEMORIES</h2>
+                </div>
+
+                <button id="downloadAllBtn" class="download-all-btn">
+                    <i class="fa-solid fa-download"></i>
+                    DOWNLOAD ALL
+                </button>
+
+            </div>
+
+
+            <div class="client-photo-grid">
+
+              
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <h1>SS</h1>
+
+        <p>PHOTOGRAPHY</p>
+
+    </div>
+
+
+    <div class="contact-info">
+
+        <h3>CONTACT</h3>
+
+        <p>
+            <i class="fa-solid fa-location-dot"></i>
+            Badnagar, Madhya Pradesh
+        </p>
+
+        <p>
+            <i class="fa-solid fa-phone"></i>
+            +91 XXXXXXXXXX
+        </p>
+
+        <p>
+            <i class="fa-solid fa-envelope"></i>
+            ssphoto@gmail.com
+        </p>
+
+        <p>
+            <i class="fa-brands fa-whatsapp"></i>
+            Chat on WhatsApp
+        </p>
+
+    </div>
+
+
+    <div class="social">
+
+        <a href="#">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+        <h4>
+            Capture • Create • Cherish
+        </h4>
+
+    </div>
+<script>
+
+
+
+const form = document.getElementById("downloadForm");
+const loginCard = document.getElementById("loginCard");
+const gallery = document.getElementById("clientGallery");
+const grid = document.querySelector(".client-photo-grid");
+
+form.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const bookingId =
+        document.getElementById("bookingId").value.trim().toUpperCase();
+
+    const name =
+        document.getElementById("downloadName").value.trim().toLowerCase();
+
+    const mobile =
+        document.getElementById("downloadMobile").value.trim();
+
+    if (!bookingId || !name || !mobile) {
+        alert("Please fill all details.");
+        return;
+    }
+
+    try {
+
+        /* CHECK BOOKING */
+
+        const bookingResponse = await fetch(
+            `http://localhost:5000/api/bookings/${bookingId}`
+        );
+
+        const bookingData = await bookingResponse.json();
+
+        if (!bookingResponse.ok) {
+            alert("Booking ID not found.");
+            return;
+        }
+
+        const booking = bookingData.booking;
+
+        if (
+            booking.name.toLowerCase() !== name ||
+            booking.mobile !== mobile
+        ) {
+            alert("Name ya mobile number match nahi kar raha.");
+            return;
+        }
+
+
+        /* GET PHOTOS */
+
+        const photoResponse = await fetch(
+            `http://localhost:5000/api/gallery/${bookingId}`
+        );
+
+        const photoData = await photoResponse.json();
+
+        if (!photoResponse.ok) {
+            alert("Gallery load nahi hui.");
+            return;
+        }
+
+
+        /* SHOW GALLERY */
+
+        loginCard.style.display = "none";
+        gallery.style.display = "block";
+        gallery.style.opacity = "1";
+        gallery.style.transform = "none";
+
+        grid.innerHTML = "";
+
+
+        if (photoData.photos.length === 0) {
+
+            grid.innerHTML = `
+                <div class="no-photos">
+                    <h3>Photos are not available yet.</h3>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        /* ADD PHOTOS */
+
+        photoData.photos.forEach(photo => {
+
+            const box = document.createElement("div");
+
+            box.className = "client-photo";
+
+            const imageUrl =
+                `http://localhost:5000${photo.url}`;
+
+            box.innerHTML = `
+                
+                <img
+                    src="${imageUrl}"
+                    alt="Client Photo"
+                >
+
+                <a
+                    href="${imageUrl}"
+                    download
+                    class="photo-download"
+                >
+                    <i class="fa-solid fa-download"></i>
+                </a>
+
+            `;
+
+            grid.appendChild(box);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server connection error.");
+
+    }
+
+});
+
+
+
+</script>
+</footer>
+
+
+
+
+
+
+
+</body>
+</html>

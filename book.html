@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Event | SS Photography</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            <i class="fa-solid fa-camera"></i>
+            <span>SS</span>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="index.html">HOME</a>
+            </li>
+
+            <li>
+                <a class="active" href="book.html">BOOK EVENT</a>
+            </li>
+
+            <li>
+                <a href="download.html">DOWNLOAD PHOTOS</a>
+            </li>
+
+            <li>
+                <a href="index.html#contact">CONTACT</a>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+
+<!-- ================= BOOK EVENT ================= -->
+
+<section class="booking-page">
+
+    <div class="booking-wrapper">
+
+        <div class="booking-heading">
+
+            <span>RESERVE YOUR DATE</span>
+
+            <h1>BOOK YOUR EVENT</h1>
+
+            <p>
+                जो पल गुज़र जाते हैं,
+                वो लौटकर नहीं आते।
+                <br>
+                उन्हें यादों में संजोने के लिए अपनी तारीख आज ही चुनें।
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form id="bookingForm">
+
+            <div class="form-grid">
+
+                <!-- NAME -->
+                <div class="form-group">
+                    <label>FULL NAME</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+                </div>
+
+
+                <!-- MOBILE -->
+                <div class="form-group">
+                    <label>MOBILE NUMBER</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            placeholder="Enter mobile number"
+                            maxlength="10"
+                            required
+                        >
+                    </div>
+                </div>
+
+
+                <!-- EVENT -->
+                <div class="form-group">
+
+                    <label>SELECT EVENT</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-camera-retro"></i>
+
+                        <select id="event" required>
+
+                            <option value="">
+                                Choose your event
+                            </option>
+
+                            <option value="Wedding">
+                                Wedding
+                            </option>
+
+                            <option value="Pre Wedding">
+                                Pre Wedding
+                            </option>
+
+                            <option value="Engagement">
+                                Engagement
+                            </option>
+
+                            <option value="Haldi">
+                                Haldi
+                            </option>
+
+                            <option value="Birthday">
+                                Birthday
+                            </option>
+
+                            <option value="Baby Shoot">
+                                Baby Shoot
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE -->
+<div class="form-group">
+    <label for="date">EVENT DATE</label>
+    <div class="input-box">
+        <i class="fa-solid fa-calendar-days"></i>
+        <input
+            type="text"
+            id="date"
+            name="date"
+            placeholder="DD/MM/YYYY"
+            inputmode="numeric"
+            maxlength="10"
+            autocomplete="off"
+            required
+        >
+    </div>
+</div>
+
+
+<!-- CITY -->
+                <div class="form-group full-width">
+
+                    <label>EVENT LOCATION</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Enter event location"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+                <div class="form-group full-width">
+
+                    <label>ADDITIONAL MESSAGE</label>
+
+                    <div class="textarea-box">
+
+                        <i class="fa-solid fa-message"></i>
+
+                        <textarea
+                            id="message"
+                            placeholder="Tell us about your event..."
+                            rows="5"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit" class="booking-submit">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                REQUEST BOOKING
+
+            </button>
+
+
+            <p class="booking-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Your details are kept private.
+
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <h1>SS</h1>
+
+        <p>PHOTOGRAPHY</p>
+
+    </div>
+
+
+    <div class="contact-info">
+
+        <h3>CONTACT</h3>
+
+        <p>
+            <i class="fa-solid fa-location-dot"></i>
+            Badnagar, Madhya Pradesh
+        </p>
+
+        <p>
+            <i class="fa-solid fa-phone"></i>
+            +91 XXXXXXXXXX
+        </p>
+
+        <p>
+            <i class="fa-solid fa-envelope"></i>
+            ssphoto@gmail.com
+        </p>
+
+        <p>
+            <i class="fa-brands fa-whatsapp"></i>
+            Chat on WhatsApp
+        </p>
+
+    </div>
+
+
+    <div class="social">
+
+        <a href="#">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+        <h4>
+            Capture • Create • Cherish
+        </h4>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+const bookingForm = document.getElementById("bookingForm");
+const dateInput = document.getElementById("date");
+
+// Date is entered manually as DD/MM/YYYY
+dateInput.addEventListener("input", function () {
+    let value = this.value.replace(/\D/g, "").slice(0, 8);
+
+    if (value.length > 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4);
+    } else if (value.length > 2) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+    }
+
+    this.value = value;
+});
+
+function isValidDate(value) {
+    const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
+    if (!match) return false;
+
+    const day = Number(match[1]);
+    const month = Number(match[2]);
+    const year = Number(match[3]);
+    const date = new Date(year, month - 1, day);
+
+    return (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+    );
+}
+
+bookingForm.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const eventType = document.getElementById("event").value;
+    const date = document.getElementById("date").value;
+    const location = document.getElementById("location").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!isValidDate(dateInput.value)) {
+        alert("Please enter a valid date in DD/MM/YYYY format.");
+        dateInput.focus();
+        return;
+    }
+
+    // Mobile validation
+    if (!/^[0-9]{10}$/.test(mobile)) {
+        alert("Please enter a valid 10 digit mobile number.");
+        return;
+    }
+
+    // Button
+    const submitButton = bookingForm.querySelector(".booking-submit");
+    const originalText = submitButton.innerHTML;
+
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        SUBMITTING...
+    `;
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/bookings", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                name: name,
+                mobile: mobile,
+                event: eventType,
+                date: date,
+                location: location,
+                message: message
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Booking failed.");
+        }
+
+        // Save latest booking locally too
+        localStorage.setItem(
+            "latestBooking",
+            JSON.stringify(result.booking)
+        );
+
+        alert(
+            "✅ Booking request submitted successfully!\n\n" +
+            "Your Booking ID: " +
+            result.booking.bookingId
+        );
+
+        bookingForm.reset();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Booking submit nahi hui.\n\n" +
+            "Make sure backend server chal raha hai."
+        );
+
+    } finally {
+
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+
+    }
+
+});
+</script>
+
+</body>
+</html>

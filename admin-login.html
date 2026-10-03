@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | SS Photography</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<section class="admin-login-page">
+
+    <div class="admin-login-card">
+
+        <div class="admin-login-logo">
+            <i class="fa-solid fa-camera"></i>
+            <h1>SS</h1>
+            <p>PHOTOGRAPHY</p>
+        </div>
+
+
+        <div class="admin-login-title">
+
+            <span>PRIVATE ACCESS</span>
+
+            <h2>ADMIN LOGIN</h2>
+
+        </div>
+
+
+        <form id="adminLoginForm">
+
+            <div class="login-group">
+
+                <label>USERNAME</label>
+
+                <div class="login-input">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="login-group">
+
+                <label>PASSWORD</label>
+
+                <div class="login-input">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="showPassword"
+                        class="eye-btn"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="admin-login-btn"
+            >
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                LOGIN
+
+            </button>
+
+
+            <p id="loginMessage" class="login-message"></p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+
+const form = document.getElementById("adminLoginForm");
+
+const passwordInput =
+    document.getElementById("password");
+
+const showPassword =
+    document.getElementById("showPassword");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+
+// SHOW / HIDE PASSWORD
+
+showPassword.addEventListener("click", () => {
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+        showPassword.innerHTML =
+            '<i class="fa-solid fa-eye-slash"></i>';
+
+    } else {
+
+        passwordInput.type = "password";
+
+        showPassword.innerHTML =
+            '<i class="fa-solid fa-eye"></i>';
+
+    }
+
+});
+
+
+// LOGIN
+
+form.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+
+    loginMessage.textContent = "Logging in...";
+    loginMessage.className = "login-message";
+
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/admin/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            }
+        );
+
+
+        const result = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message || "Login failed"
+            );
+
+        }
+        localStorage.setItem("ssAdminLoggedIn", "true");
+        window.location.href = "admin.html";
+
+
+        // Login successful
+
+        localStorage.setItem(
+            "ssAdminLoggedIn",
+            "true"
+        );
+
+
+        window.location.href =
+            "admin.html";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loginMessage.textContent =
+            "❌ Invalid username or password.";
+
+        loginMessage.className =
+            "login-message error";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

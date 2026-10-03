@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin | SS Photography</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <script>
+    const adminLoggedIn =
+        localStorage.getItem("ssAdminLoggedIn");
+
+    if (adminLoggedIn !== "true") {
+        window.location.href = "admin-login.html";
+    }
+</script>
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            <i class="fa-solid fa-camera"></i>
+            <span>SS</span>
+        </div>
+
+        <ul class="menu">
+            <li>
+                <a href="index.html">HOME</a>
+            </li>
+
+            <li>
+                <a href="book.html">BOOK EVENT</a>
+            </li>
+
+            <li>
+                <a href="download.html">DOWNLOAD PHOTOS</a>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+
+<section class="admin-page">
+
+    <div class="admin-wrapper">
+
+        <div class="admin-heading">
+
+            <span>SS PHOTOGRAPHY</span>
+
+            <h1>ADMIN PANEL</h1>
+            <button
+    onclick="logoutAdmin()"
+    class="admin-btn"
+>
+    <i class="fa-solid fa-right-from-bracket"></i>
+    LOGOUT
+</button>
+
+            <p>Event Bookings</p>
+
+        </div>
+
+        <div id="bookingList">
+            Loading bookings...
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+async function loadBookings() {
+
+    const bookingList =
+        document.getElementById("bookingList");
+
+    try {
+
+        const response =
+            await fetch("http://localhost:5000/api/bookings");
+
+        const result =
+            await response.json();
+
+        if (!result.bookings.length) {
+
+            bookingList.innerHTML =
+                "<p>No bookings found.</p>";
+
+            return;
+        }
+
+
+        bookingList.innerHTML = "";
+
+
+        result.bookings
+            .slice()
+            .reverse()
+            .forEach(booking => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "admin-booking-card";
+
+                card.innerHTML = `
+
+                    <div class="booking-id">
+                        ${booking.bookingId}
+                    </div>
+
+                    <h2>${booking.name}</h2>
+
+                    <a
+    href="https://wa.me/91${booking.mobile}"
+    target="_blank"
+    class="whatsapp-btn"
+>
+    <i class="fa-brands fa-whatsapp"></i>
+    CHAT ON WHATSAPP
+</a>
+
+                    <p>
+                        <i class="fa-solid fa-phone"></i>
+                        ${booking.mobile}
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-camera"></i>
+                        ${booking.event}
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-calendar"></i>
+                        ${booking.date}
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        ${booking.location}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        ${booking.status}
+                    </p>
+
+                    <div class="status-buttons">
+
+    <button
+        class="status-btn pending-btn"
+        onclick="updateStatus('${booking.bookingId}', 'Pending')"
+    >
+        PENDING
+    </button>
+
+    <button
+        class="status-btn confirm-btn"
+        onclick="updateStatus('${booking.bookingId}', 'Confirmed')"
+    >
+        CONFIRM
+    </button>
+
+    <button
+        class="status-btn reject-btn"
+        onclick="updateStatus('${booking.bookingId}', 'Rejected')"
+    >
+        REJECT
+    </button>
+
+</div>
+
+                    <div class="upload-area">
+
+    <label>UPLOAD CLIENT PHOTOS</label>
+
+    <input
+        type="file"
+        class="photo-input"
+        multiple
+        accept="image/*"
+        id="photos-${booking.bookingId}"
+    >
+
+    <button
+        class="upload-btn"
+        onclick="uploadPhotos('${booking.bookingId}')"
+    >
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        UPLOAD PHOTOS
+    </button>
+
+    <p id="upload-status-${booking.bookingId}"></p>
+
+</div>
+
+                `;
+
+                bookingList.appendChild(card);
+
+            });
+
+    } catch (error) {
+
+        bookingList.innerHTML =
+            "<p>Backend se connect nahi ho pa raha.</p>";
+
+        console.error(error);
+
+    }
+
+}
+
+loadBookings();
+
+async function uploadPhotos(bookingId) {
+
+    const input =
+        document.getElementById(`photos-${bookingId}`);
+
+    const status =
+        document.getElementById(`upload-status-${bookingId}`);
+
+    if (!input.files.length) {
+
+        alert("Pehle photos select karo.");
+
+        return;
+    }
+
+    const formData = new FormData();
+
+    for (const file of input.files) {
+        formData.append("photos", file);
+    }
+
+    status.innerText = "Uploading...";
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/upload/${bookingId}`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                result.message || "Upload failed"
+            );
+        }
+
+        status.innerText =
+            `✅ ${result.files.length} photo(s) uploaded.`;
+
+        input.value = "";
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerText =
+            "❌ Upload failed.";
+
+    }
+}
+function logoutAdmin() {
+    localStorage.removeItem("ssAdminLoggedIn");
+    window.location.href = "admin-login.html";
+}
+
+async function updateStatus(bookingId, status) {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/bookings/${bookingId}/status`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    status: status
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message || "Status update failed"
+            );
+
+        }
+
+        alert(
+            `Booking ${bookingId} is now ${status}.`
+        );
+
+        loadBookings();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Status update nahi ho paya."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
